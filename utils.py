@@ -25,7 +25,6 @@ def to_sparse(x):
     values = x[tuple(indices[i] for i in range(indices.shape[0]))]
     return sparse_tensortype(indices, values, x.size())
 
-
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--embedder", type=str, default="A")
@@ -52,18 +51,16 @@ def parse_args():
     parser.add_argument("--epochs_cls", type=int, default=600, help="The number of training epochs for node classification classifier.")
     parser.add_argument("--norm_cls", action="store_true", help="Enable normalization (default: False)")
     
-
-    parser.add_argument("--pool_dropout", type=float, default=0.2, help="投影层dropout")
     parser.add_argument("--pool_ratio", type=float, default=0.7)
 
     
-    parser.add_argument("--a1", type=float, default=1, help="Muti-granularity loss weight,infoNCE loss")
+    parser.add_argument("--a1", type=float, default=1, help="Muti-granularity loss weight")
     parser.add_argument("--a2", type=float, default=1, help="Muti-granularity loss weight,infoNCE loss")
-    parser.add_argument("--a3", type=float, default=1, help="Muti-granularity loss weight,infoNCE loss")
+    parser.add_argument("--a3", type=float, default=1)
     parser.add_argument("--tau", type=float, default=0.5, help="temperature of infoNCE loss")
     
     
-    parser.add_argument("--p", type=float, default=0.0001, help="pool loss weight")
+    parser.add_argument("--p", type=float, default=0.01, help="pool loss weight")
     parser.add_argument("--lam", type=float, default=1, help="weight of redundancy")
     
     return parser.parse_known_args()

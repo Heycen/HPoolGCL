@@ -17,8 +17,8 @@ def main():
     args, unknown = utils.parse_args()
     
     set_seed(args.seed)
-    from .models.PoolGCL import PoolGCL_ModelTrainer
-    embedder = PoolGCL_ModelTrainer(args)
+    from .models.HPoolGCL import PoolGCL_ModelTrainer
+    embedder =HPoolGCL_ModelTrainer(args)
 
     embedder.train()
     

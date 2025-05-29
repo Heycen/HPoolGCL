@@ -30,7 +30,7 @@ def set_seed(seed):
     torch.backends.cudnn.benchmark = False
 
 
-class PoolGCL_ModelTrainer(embedder):
+class HPoolGCL_ModelTrainer(embedder):
 
     def __init__(self, args):
         embedder.__init__(self, args)
@@ -112,7 +112,7 @@ class PoolGCL_ModelTrainer(embedder):
         layers = [self._dataset.data.x.shape[1]] + self.hidden_layers
 
         self._encoder = Encoder(layers, args.dropout, args)
-        self._model = PoolGCL(self._encoder, layers, args).to(self._device)
+        self._model = HPoolGCL(self._encoder, layers, args).to(self._device)
 
         self._lr_scheduler = CosineDecayScheduler(
             args.lr, args.warmup_epochs, args.epochs
@@ -212,7 +212,7 @@ class PoolGCL_ModelTrainer(embedder):
         )
 
 
-class PoolGCL(nn.Module):
+class HPoolGCL(nn.Module):
     def __init__(self, encoder, layer_config, args, **kwargs):
         super().__init__()
         self.online_encoder = encoder
